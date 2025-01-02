@@ -1,0 +1,111 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    position: relative;
+}
+
+pre {
+    font-family: inherit;
+}
+
+#app {
+    height: 100vh;
+}
+
+.app--navbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000000000;
+}
+
+.app--navbar > .p-menubar.p-component {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+body[data-theme-mode="light"] .app--navbar > .p-menubar.p-component {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+body[data-theme-mode="dark"] .app--navbar > .p-menubar.p-component {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #27272a;
+}
+
+.app--navbar > .p-menubar.p-component .p-menubar-start {
+    display: none;
+    margin-right: auto;
+}
+
+.app--navbar > .p-menubar.p-component .p-menubar-end {
+    margin-left: auto;
+}
+
+.app--main-container {
+    height: 100%;
+    min-height: 100%;
+    padding-top: 66px;
+}
+
+.app--main-container > .app--sub-container {
+    height: calc(100% - 66px);
+    position: relative;
+}
+
+.app--navbar .app-logo-container-mobile {
+    display: flex;
+}
+
+.center-vertical {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.center-horizontal {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.center-vertical-horizontal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.list-container {
+    width: 100%;
+}
+@media screen and (min-width: 768px){
+    .list-container { max-width: 600px; }
+}
+
+@media screen and (min-width: 961px) {
+    .app--navbar > .p-menubar.p-component .p-menubar-root-list {
+        margin: 0 auto;
+        padding-right: 28px;
+    }
+
+    .app--navbar > .p-menubar.p-component .p-menubar-start {
+        padding-right: unset;
+        display: flex;
+    }
+
+    .app--navbar .app-logo-container-mobile {
+        display: none;
+    }
+}
+
+.p-dialog-mask {
+    z-index: 2000000000 !important;
+}
+
+.p-galleria-mask {
+    z-index: 3000000000 !important;
+}
+
+/*.p-image-mask {
+    z-index: 3000000000 !important;
+}*/
