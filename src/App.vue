@@ -3,19 +3,14 @@ import {shallowRef, provide, ref, computed, watch} from "vue";
 import {useRouter, useRoute} from "vue-router";
 import {storeToRefs} from "pinia";
 import layouts from "@/components/layouts/index.js";
-import {usePrimeVue} from "primevue/config";
 import browserStorage from "@/lib/browser-storage.js";
 import {useAuthStore} from "@/stores/auth.store";
 
 const route = useRoute();
 const router = useRouter();
-const PrimeVue = usePrimeVue();
-
-let initialThemeMode = browserStorage.get("themeMode") || window.document.body.getAttribute('data-theme-mode');
-initialThemeMode = /^(dark)|(light)$/.test(initialThemeMode) ? initialThemeMode : 'light';
 
 const layout = shallowRef('div');
-const themeMode = ref(initialThemeMode);
+const themeMode = ref(['light', 'dark'].includes(browserStorage.get("themeMode")) ? browserStorage.get("themeMode") : 'light');
 const isDarkMode = ref(themeMode.value === 'dark');
 const isUpdatingThemeMode = ref(false);
 
@@ -28,34 +23,12 @@ const setLayout = (layoutName) => {
 
 const toggleThemeMode = async () => {
 	if (isUpdatingThemeMode.value) return;
-	const themeLinkId = 'theme-link';
-	const themeLink = window.document.getElementById(themeLinkId);
 
-	if (themeLink) {
-		const regexResult = /.+-(light|dark)-.+\/theme(\.min)?\.css/i.exec(themeLink.getAttribute('href'));
+    isDarkMode.value = document.documentElement.classList.toggle('dark-mode');
 
-		if (!!regexResult && !!regexResult[1]) {
-			const currentThemeMode = regexResult[1];
-			const newThemeMode = (currentThemeMode === 'dark') ? 'light' : 'dark';
+    browserStorage.set('themeMode', isDarkMode.value ? 'dark' : 'light');
 
-			isUpdatingThemeMode.value = true;
-			const currentThemeName = `aura-${currentThemeMode}-blue`
-			const newThemeName = `aura-${newThemeMode}-blue`;
-
-			PrimeVue.changeTheme(
-					currentThemeName,
-					newThemeName,
-					themeLinkId,
-					() => {
-						window.document.body.setAttribute('data-theme-mode', newThemeMode);
-						browserStorage.set('themeMode', newThemeMode);
-
-						themeMode.value = newThemeMode;
-						isDarkMode.value = (newThemeMode === 'dark');
-						isUpdatingThemeMode.value = false;
-					});
-		}
-	}
+    isUpdatingThemeMode.value = false;
 };
 
 provide("app:setLayout", setLayout);

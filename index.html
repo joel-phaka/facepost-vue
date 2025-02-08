@@ -4,27 +4,15 @@
         <meta charset="UTF-8"/>
         <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link id="theme-link" rel="stylesheet" href="/themes/aura-dark-blue/theme.css">
         <title>Facepost</title>
+        <link rel="preconnect" href="https://rsms.me/">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     </head>
-    <body data-theme-mode="dark">
+    <body>
         <div id="app"></div>
         <script>
-            const themeLinkId = 'theme-link';
-            const themeLink = document.getElementById(themeLinkId);
-            const currentThemeMode = localStorage.getItem('themeMode');
-
-            if (themeLink && ['light', 'dark'].includes(currentThemeMode)) {
-                const regexResult = /.+-(light|dark)-.+\/theme(\.min)?\.css/i.exec(themeLink.getAttribute('href'));
-
-                if (!!regexResult && !!regexResult[1]) {
-                    const newThemeHref = themeLink.getAttribute('href').replace(
-                        /(.+-)(?:light|dark)(-.+\/theme\.css)/i,
-                        `$1${currentThemeMode}$2`
-                    );
-                    themeLink.setAttribute('href', newThemeHref);
-                    document.body.setAttribute('data-theme-mode', currentThemeMode)
-                }
+            if (localStorage.getItem('themeMode') === 'dark') {
+                document.documentElement.classList.add('dark-mode');
             }
         </script>
         <script type="module" src="/src/main.js"></script>
