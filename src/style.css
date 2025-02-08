@@ -1,8 +1,21 @@
-body, html {
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+html, body {
     padding: 0;
     margin: 0;
     height: 100%;
     position: relative;
+    font-family: 'Inter var', 'Inter', sans-serif;
+}
+
+.p-component, .p-component *:not(.pi) {
+    font-family: 'Inter var', 'Inter', sans-serif;
 }
 
 pre {
@@ -26,11 +39,11 @@ pre {
     backdrop-filter: blur(8px);
 }
 
-body[data-theme-mode="light"] .app--navbar > .p-menubar.p-component {
+html:not(.dark-mode) .app--navbar > .p-menubar.p-component {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-body[data-theme-mode="dark"] .app--navbar > .p-menubar.p-component {
+html.dark-mode .app--navbar > .p-menubar.p-component {
     background-color: rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid #27272a;
 }
