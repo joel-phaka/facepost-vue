@@ -88,10 +88,11 @@ const handleLike = async () => {
 					<div class="flex align-items-center" style="gap: 8px; padding: 8px">
 						<Button
 							:disabled="isLikingInProgress"
-							:icon="`pi pi-thumbs-${post.is_liked ? 'up' : 'down'}`"
+							icon="pi pi-thumbs-up"
 							severity="info"
 							rounded
-							outlined aria-label="Thumb"
+							:outlined="!post.is_liked"
+              aria-label="Thumb"
 							@click="handleLike"/>
 						<span class="text-gray-500">|</span>
 						<Button

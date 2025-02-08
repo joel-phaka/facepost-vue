@@ -1,12 +1,13 @@
 <script setup>
 import {shallowRef, provide, ref, computed, watch} from "vue";
-import {useRouter} from "vue-router";
+import {useRouter, useRoute} from "vue-router";
 import {storeToRefs} from "pinia";
 import layouts from "@/components/layouts/index.js";
 import {usePrimeVue} from "primevue/config";
 import browserStorage from "@/lib/browser-storage.js";
 import {useAuthStore} from "@/stores/auth.store";
 
+const route = useRoute();
 const router = useRouter();
 const PrimeVue = usePrimeVue();
 
@@ -74,8 +75,16 @@ router.afterEach((to) => {
 watch(
 	() => isAuthenticated.value, 
 	(value) => {
-		if (!value) router.push('/signin');
-	}
+        let query = {};
+
+        if (!/^\/(login)|(signin)|(logout)|(signout)/.test(route.fullPath)) {
+            query.continue = route.fullPath;
+        }
+
+        if (!value) {
+            router.replace({path: '/signin', query});
+        }
+    }
 );
 
 </script>

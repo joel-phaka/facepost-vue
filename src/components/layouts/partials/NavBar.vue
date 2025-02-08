@@ -73,9 +73,9 @@ onErrorCaptured((err) => {
 						:model="accountMenuItems"
 						:popup="true"
 						:pt="{
-							root: {style: {'position': 'fixed', 'top': '70px', 'width': '270px'}},
+							root: {style: {'position': 'fixed', 'top': '70px', 'width': '270px', 'z-index': '1000000000'}},
 							start: {style: {'padding': '0.75rem'}},
-							action: {class: ['py-3'], 'aria-hidden': 'false'},
+							action: {class: ['py-3'], 'aria-hidden': 'false'}
 						}">
 						<template #start>
 							<div class="flex flex-column align-items-center justify-content-center">

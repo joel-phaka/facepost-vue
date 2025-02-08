@@ -86,7 +86,7 @@ onBeforeMount(async () => {
 				    </span>
 			    </div>
 			    <div class="flex align-items-center" style="gap: 4px">
-				    <Button @click="handleLike" :disabled="isProcessing" :icon="`pi pi-thumbs-${post.is_liked ? 'up' : 'down'}`" severity="info" rounded outlined aria-label="Thumb" />
+				    <Button @click="handleLike" :disabled="isProcessing" icon="pi pi-thumbs-up" severity="info" rounded :outlined="!post.is_liked" aria-label="Thumb" />
 				    <Button @click="showModal=true" :disabled="isProcessing" icon="pi pi-comment" severity="info" rounded outlined aria-label="Comment" />
 				    <Dialog v-model:visible="showModal" modal :closeOnEscape="false" :header="post.title" :style="{ width: '90vw', 'max-width': '550px' }" :pt:footer:style="{'just-content': 'flex-stretch'}">
 					    <pre class="m-0 mb-3" style="font-family: inherit; white-space: pre-line;">
